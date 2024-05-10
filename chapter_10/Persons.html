@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>List of Persons</title>
+    <!-- Include Redux library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.1.0/redux.min.js"></script>
+</head>
+
+<body>
+    <script>
+        // Function to create an action for adding a person
+        function addPerson(id, name, age) {
+            return {
+                type: "ADD", // Action type
+                personData: { // Data for the action
+                    id: id, // Person ID
+                    name: name, // Person's name
+                    age: age // Person's age
+                }
+            }
+        }
+
+        // Function to create an action for removing a person
+        function removePerson(id) {
+            return {
+                type: "REMOVE", // Action type
+                personId: id // ID of the person to remove
+            }
+        }
+
+        // Initial state of the Redux store
+        const initialState = {
+            persons: [] // Array to store list of persons
+        };
+
+        // Reducer function to update the state based on dispatched actions
+        function reducer(state, action) {
+            // If state is undefined, use the initial state
+            if (state === undefined) {
+                state = initialState;
+            }
+            // Handle different action types
+            if (action.type === "ADD") {
+                // If action is to add a person
+                const newPerson = {
+                    id: action.personData.id, // Person ID
+                    name: action.personData.name, // Person's name
+                    age: action.personData.age // Person's age
+                }
+                // Add the new person to the array of persons
+                return {
+                    ...state,
+                    persons: state.persons.concat(newPerson)
+                }
+            } else if (action.type === "REMOVE") {
+                // If action is to remove a person
+                // Filter out the person with the specified ID
+                return {
+                    ...state,
+                    persons: state.persons.filter(person => person.id !== action.personId)
+                }
+            } else {
+                // If action type is not recognized, return the current state
+                return state;
+            }
+        }
+
+        // Create a Redux store with the reducer function
+        let store = Redux.createStore(reducer);
+
+        // Function to display the current state of the store
+        function showState() {
+            console.log(store.getState());
+        }
+
+        // Subscribe to the store to listen for changes
+        store.subscribe(showState);
+
+        // Dispatch some actions to test the reducer
+        store.dispatch(addPerson(1, "Greg", 5));
+        store.dispatch(addPerson(2, "Carol", 3));
+        store.dispatch(addPerson(3, "Gabriel", 6));
+        store.dispatch(addPerson(4, "Fred", 8));
+        store.dispatch(removePerson(4));
+    </script>
+</body>
+
+</html>
