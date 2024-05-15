@@ -14,7 +14,7 @@ function ToDoList() {
     const [editMode, setEditMode] = useState(false); // State to manage edit mode
     const [editTodo, setEditTodo] = useState(null); // State to store the todo being edited
 
-    const endpoint = "https://localhost:3000/todos/"
+    const endpoint = "http://localhost:3000/todos/"
     const savedTodos = useAPI(endpoint)
 
     useEffect(() => {
@@ -27,16 +27,19 @@ function ToDoList() {
     // Function to handle form submission
     const handleSubmit = async event => {
         event.preventDefault(); // Prevent the default form submission behavior
+
         if (editMode) { // If in edit mode
             // Dispatch edit action with the updated todo
             await axios.patch(endpoint + editTodo.id, { text: todoText })
             dispatch({ type: 'edit', payload: { ...editTodo, text: todoText } });
             setEditMode(false); // Exit edit mode
             setEditTodo(null); // Clear the edit todo
+
+
         } else { // If in add mode
             // Dispatch add action with the new todo text
             const newToDo = { id: uuidv4(), text: todoText }
-            const response = await axios.post(endpoint, newToDo)
+            await axios.post(endpoint, newToDo)
             dispatch({ type: 'add', payload: newToDo });
         }
         setTodoText(""); // Clear the input field after adding/editing
@@ -50,8 +53,8 @@ function ToDoList() {
                     <Form.Control
                         type="text"
                         placeholder="Enter To Do"
-                        value={todoText} // Controlled input
                         onChange={event => setTodoText(event.target.value)} // Update todoText state as user types
+                        value={todoText} // Controlled input
                     />
                 </Form.Group>
                 <Button variant="primary" type="submit">
@@ -73,7 +76,7 @@ function ToDoList() {
                             <td>{todo.text}</td>
                             <td
                                 // Click handler to populate input field with todo text and enable edit mode
-                                onClick={() => {
+                                onClick={async () => {
                                     setTodoText(todo.text);
                                     setEditMode(true);
                                     setEditTodo(todo);

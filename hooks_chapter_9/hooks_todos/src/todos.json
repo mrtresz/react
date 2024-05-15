@@ -1,16 +1,12 @@
 {
-    "todos": [
-        {
-            "id": 1,
-            "text": "finishing writing hooks chapter"
-        },
-        {
-            "id": 2,
-            "text": "play with kids"
-        },
-        {
-            "id": 3,
-            "text": "read bible"
-        }
-    ]
+  "todos": [
+    {
+      "id": "911c8200-62b4-49ef-bbb5-5056c86265f1",
+      "text": "Eating"
+    },
+    {
+      "id": "8b5a1e0e-8caf-442d-a0c2-e9ecdc06cb2f",
+      "text": "coding"
+    }
+  ]
 }

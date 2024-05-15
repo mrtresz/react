@@ -4,6 +4,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
 // import Products from './Products';
 import JumbotronComponent from './JumbotronComponent';
+// import Products from "./Products"
 
 function App() {
 
@@ -13,6 +14,7 @@ function App() {
       <JumbotronComponent>
         This is a long sentence, and i want to insert content into the jumbotron component from the outside
       </JumbotronComponent>
+
     </div>
   );
 }

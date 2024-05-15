@@ -9,6 +9,20 @@ const todosInitialState = {
 };
 
 // Reducer function for managing todos
+// Creating a context for todos
+export const TodosContext = React.createContext()
+
+// Main App component
+function App() {
+  // Using useReducer hook to manage state with todosReducer and initial state todosInitialState
+  const [state, dispatch] = useReducer(todosReducer, todosInitialState)
+  // Providing the state and dispatch function to the ToDoList component through context
+  return (
+    <TodosContext.Provider value={{ state, dispatch }}>
+      <ToDoList />
+    </TodosContext.Provider>
+  );
+}
 function todosReducer(state, action) {
   // Switch statement to handle different actions
   switch (action.type) {
@@ -48,20 +62,7 @@ function todosReducer(state, action) {
   }
 }
 
-// Creating a context for todos
-export const TodosContext = React.createContext()
 
-// Main App component
-function App() {
-  // Using useReducer hook to manage state with todosReducer and initial state todosInitialState
-  const [state, dispatch] = useReducer(todosReducer, todosInitialState)
-  // Providing the state and dispatch function to the ToDoList component through context
-  return (
-    <TodosContext.Provider value={{ state, dispatch }}>
-      <ToDoList />
-    </TodosContext.Provider>
-  );
-}
 
 // Exporting App component
 export default App;

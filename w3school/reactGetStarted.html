@@ -1,0 +1,86 @@
+<html>
+
+<head>
+
+    <script src="https://unpkg.com/react@18/umd/react.development.js" crossorigin></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js" crossorigin></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+
+<body>
+
+    <div id="mydiv"></div>
+
+    <script type="text/babel">
+        function Hello() {
+            return <h1>Hello World!</h1>;
+        }
+
+        const container = document.getElementById('mydiv');
+        const root = ReactDOM.createRoot(container);
+        root.render(<ShowList />)
+
+
+        //classes
+
+        class Car {
+            constructor(name) {
+                this.brand = name;
+            }
+
+            present() {
+                return "I have a  " + this.brand;
+            }
+        }
+
+        class Model extends Car {
+            constructor(name, mod) {
+                super(name);
+                this.model = mod;
+            }
+
+            show() {
+                return this.present() + ", it is a  " + this.model;
+            }
+        }
+
+        const myCar = new Car("BMW");
+
+        const myCar2 = new Model("BMW", "M6 Competition");
+        console.log(myCar2.show())
+
+        // arrow functions
+
+        const hello = () => {
+            return console.log("hello World")
+        }
+
+        // or 
+
+        const hello2 = () => console.log("Hello React") //if the function has only one statement;
+
+        hello2();
+
+        //Variables var
+
+        //var let const
+
+
+        /// Array Methods
+        function ShowList() {
+            const myArray = ["apple", 'banana', "orange"];
+
+            const myList = myArray.map(item => <p key={item}>{item}</p>)
+            return myList;
+
+        }
+
+
+
+
+
+    </script>
+
+</body>
+
+</html>

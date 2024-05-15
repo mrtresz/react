@@ -2,6 +2,7 @@ import Tabs from "./Tabs";
 import Items from "./Items";
 import Data from "./Data";
 import { useState } from "react";
+
 function Gallery() {
 
     const [data, setData] = useState(Data);
